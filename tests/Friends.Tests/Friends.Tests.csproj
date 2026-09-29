@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <IsPackable>false</IsPackable>
+    <RootNamespace>AssisticantMauiAlphaTest.Friends.Tests</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <!-- Friends code has no MAUI dependency; compile it directly for testing. -->
+    <Compile Include="..\..\Friends\*.cs" />
+    <Compile Include="..\..\Patterns\*.cs" />
+    <!-- Pages need MAUI; only the model and view models are tested here. -->
+    <Compile Remove="..\..\Friends\*Page.xaml.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.10.0" />
+    <PackageReference Include="xunit" Version="2.9.3" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.8.2" />
+    <PackageReference Include="Jinaga" Version="1.1.54" />
+    <PackageReference Include="Assisticant" Version="1.6.0-alpha.1" />
+    <PackageReference Include="Assisticant.SourceGenerators" Version="0.1.0-alpha.1" PrivateAssets="all" />
+  </ItemGroup>
+</Project>
