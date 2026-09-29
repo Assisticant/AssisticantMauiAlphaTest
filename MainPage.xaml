@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:AssisticantMauiAlphaTest"
+             x:Class="AssisticantMauiAlphaTest.MainPage"
+             x:DataType="local:PersonViewModel">
+
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="30,0"
+            Spacing="25">
+            <Image
+                Source="dotnet_bot.png"
+                HeightRequest="185"
+                Aspect="AspectFit"
+                SemanticProperties.Description="dot net bot in a submarine number ten" />
+
+            <Label
+                Text="Assisticant alpha: [Observable]/[Computed]/[NotifyPropertyChanged]/[Command]"
+                Style="{StaticResource Headline}"
+                SemanticProperties.HeadingLevel="Level1" />
+
+            <!-- Greeting is [Computed] on the ViewModel, derived from the
+                 injected Model (Person.Name/Age). Live-updates via the
+                 PropertyChanged [NotifyPropertyChanged] raises whenever
+                 BirthdayCommand mutates the Model. -->
+            <Label
+                Text="{Binding Greeting}"
+                Style="{StaticResource SubHeadline}"
+                SemanticProperties.HeadingLevel="Level2" />
+
+            <!-- BirthdayCommand is [Command]: mutating the Model here proves
+                 the [Computed] Greeting above re-raises PropertyChanged with
+                 no BindingManager and no hand-written PropertyChanged code. -->
+            <Button
+                Text="Happy Birthday!"
+                Command="{Binding BirthdayCommand}"
+                HorizontalOptions="Fill" />
+
+            <!-- SelectionLabel is [Computed] depending on IsSelected, an
+                 [Observable] property declared directly on the ViewModel
+                 (not the Model) - the deliberate exception for ViewModel-local
+                 UI state. ToggleSelectionCommand exercises [Command] again,
+                 this time mutating ViewModel state instead of Model state. -->
+            <Label
+                Text="{Binding SelectionLabel}"
+                FontAttributes="Italic" />
+
+            <Button
+                Text="Toggle Selection"
+                Command="{Binding ToggleSelectionCommand}"
+                HorizontalOptions="Fill" />
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
