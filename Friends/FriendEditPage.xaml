@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:friends="clr-namespace:AssisticantMauiAlphaTest.Friends"
+             x:Class="AssisticantMauiAlphaTest.Friends.FriendEditPage"
+             x:DataType="friends:FriendEditViewModel"
+             Title="{Binding Title}">
+
+    <VerticalStackLayout Padding="24" Spacing="12">
+        <Label Text="{Binding Title}" FontSize="22" />
+
+        <Label Text="Name" />
+        <Entry Text="{Binding Name}" Placeholder="Name" />
+        <Label Text="{Binding NameConflict, StringFormat='Conflicting names: {0}. Saving picks the one shown.'}"
+               IsVisible="{Binding HasNameConflict}" TextColor="OrangeRed" />
+
+        <Label Text="Birth date" />
+        <DatePicker Date="{Binding BirthDate}" />
+        <Label Text="{Binding BirthDateConflict, StringFormat='Conflicting birth dates: {0}. Saving picks the one shown.'}"
+               IsVisible="{Binding HasBirthDateConflict}" TextColor="OrangeRed" />
+
+        <HorizontalStackLayout Spacing="12" HorizontalOptions="End">
+            <Button Text="Cancel" Clicked="OnCancelClicked" />
+            <Button Text="Save" Clicked="OnSaveClicked" IsEnabled="{Binding CanSave}" />
+        </HorizontalStackLayout>
+    </VerticalStackLayout>
+
+</ContentPage>
